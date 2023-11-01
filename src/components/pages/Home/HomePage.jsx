@@ -1,31 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './HomePage.css';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../../../Navbar';
-
-const foodItems = [
-  { id: 1, name: 'Pizza', price: 10 },
-  { id: 2, name: 'Burger', price: 6 },
-  { id: 3, name: 'Pasta', price: 8 },
-  { id: 4, name: 'Salad', price: 5 },
-];
+import { FoodItems } from '../../../config';
 
 const HomePage = () => {
-  const navigate = useNavigate();
-
-  // Initialize cartItems as an empty array
   const [cartItems, setCartItems] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
+  const [addedItem, setAddedItem] = useState(null);
+
+  // Load cart items from local storage when the component mounts
+  useEffect(() => {
+    const storedCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    setCartItems(storedCartItems);
+  }, []);
 
   const addToCart = (foodItem) => {
-    // Create a copy of the cartItems with the new food item
     const updatedCart = [...cartItems, foodItem];
-    console.log(foodItem);
     setCartItems(updatedCart);
 
-    // Update local storage with the updated cartItems
+    // Update the local storage with the updated cart items
     localStorage.setItem('cartItems', JSON.stringify(updatedCart));
-    // navigate('/cart');
 
+    setAddedItem(foodItem);
+    setShowPopup(true);
+
+    // Hide the pop-up after a few seconds (e.g., 3 seconds)
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 1000);
   };
 
   return (
@@ -35,22 +38,34 @@ const HomePage = () => {
         <h2>Welcome to Food Ordering App</h2>
         <p>Order your favorite dishes with just a few clicks!</p>
         <div className="menu-container">
-          {foodItems.map((foodItem) => (
-            <div key={foodItem.id} className="menu-card">
-              <h3>{foodItem.name}</h3>
-              <p>Price: ${foodItem.price}</p>
+          {FoodItems.map((foodItem) => (
+            <div className="menu-card" key={foodItem.itemId}>
+              <img src={foodItem.itemImage} alt={foodItem.itemTitle} className='image' />
+              <h3>{foodItem.itemTitle}</h3>
+              <p>{foodItem.itemDescription}</p>
+              <p>Price: ${foodItem.itemPrice}</p>
               <button
                 className="buy-button"
                 onClick={() => {
                   addToCart(foodItem);
                 }}
               >
-                AddCart
+                Add to Cart
               </button>
             </div>
           ))}
         </div>
       </div>
+      {showPopup && (
+        <div className="popup">
+          <span className="close-button" onClick={() => setShowPopup(false)}>
+            &times;
+          </span>
+          {addedItem && (
+            <p>{addedItem.itemTitle} is added to the cart</p>
+          )}
+        </div>
+      )}
     </>
   );
 };

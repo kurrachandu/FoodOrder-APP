@@ -9,9 +9,9 @@ const PostLogin = () => {
   const [values, setValues] = useState({
     username: "",
     email: "",
-    DateofBirth: "",
+    // DateofBirth: "",
     password: "",
-    confirmPassword: "",
+    // confirmPassword: "",
     gender : "",
     // login_status: "",
     // messages : []
@@ -48,7 +48,7 @@ const PostLogin = () => {
     localStorage.setItem('formData', JSON.stringify(newData));
   
     // Redirect or perform any other actions after submitting the form
-    navigate('/home');
+    navigate('/');
   };
   
 
@@ -87,7 +87,7 @@ const PostLogin = () => {
           value={values.email}
           onChange={onChange}
         />
-        <FormInput
+        {/* <FormInput
          name="mobileNumber"
          type="text"
          placeholder="Mobile Number"
@@ -97,10 +97,10 @@ const PostLogin = () => {
          required={true}
          value={values.mobileNumber}
          onChange={onChange}
-/>
+/> */}
 
         
-        <FormInput
+        {/* <FormInput
           name="DateofBirth"
           type="date"
           placeholder="Date of Birth"
@@ -108,7 +108,7 @@ const PostLogin = () => {
           required={true}
           value={values.DateofBirth}
           onChange={onChange}
-        />
+        /> */}
         
         <FormInput
           name="password"
@@ -139,7 +139,7 @@ const PostLogin = () => {
           <label For="female">Female</label>
         </div>
 
-        <FormInput
+        {/* <FormInput
           name="confirmPassword"
           type="text"
           placeholder="Confirm Password"
@@ -149,7 +149,7 @@ const PostLogin = () => {
           required={true}
           value={values.confirmPassword}
           onChange={onChange}
-        />
+        /> */}
 
 
         <button  className = "btn" type="submit" onClick={() => navigate("/login")}>Submit</button>

@@ -1,11 +1,11 @@
 /* CartPage.css */
-.cart-container {
+.Order-Items {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
   }
   
-  .cart-item {
+  .order-item {
     height: 45vh;
     margin-left: 100px;
     border-radius: 10px;
@@ -16,13 +16,13 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
   
-  .cart-item div {
+  .order-item div {
     display: flex;
     justify-content: center;
     align-items: center;
   }
   
-  .cart-item button {
+  .order-item button {
     background-color: #007bff;
     color: white;
     border: none;
@@ -31,7 +31,7 @@
     margin: 0 4px;
   }
   
-  .cart-item button:hover {
+  .order-item button:hover {
     background-color: #0056b3;
   }
   
@@ -42,7 +42,6 @@
   
   /* Styling for the "Checkout" button */
   .total button {
-    border-radius: 8px;
     background-color: #007bff;
     color: white;
     border: none;
