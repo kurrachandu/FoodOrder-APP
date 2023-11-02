@@ -9,61 +9,38 @@ const PostLogin = () => {
   const [values, setValues] = useState({
     username: "",
     email: "",
-    // DateofBirth: "",
     password: "",
-    // confirmPassword: "",
-    gender : "",
-    // login_status: "",
-    // messages : []
+    gender: "", // Added gender property
   });
   const [duplicateError, setDuplicateError] = useState(false);
-  
-  const handleSubmit = (e) => 
-  {
-    e.preventDefault();
-    // Retrieve existing data from local storage
-    const existingData = JSON.parse(localStorage.getItem('formData')) || []; // Set default value as an empty array if no existing data
-  
-    // Check if the new values already exist in the existing data
-    const isDuplicate = existingData.some((data) => 
-    {
-      console.log("DATA"+data)
-      console.log("VALUES"+values)
-      // Compare the values of the objects
-      return JSON.stringify(data.username) === JSON.stringify(values.username);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const existingData = JSON.parse(localStorage.getItem('formData')) || [];
+    const isDuplicate = existingData.some((data) => {
+      return JSON.stringify(data.username) === JSON.stringify(values.username);
     });
-  
-    if (isDuplicate) 
-    {
-      // Handle the case when the values already exist in the form data
-      alert('Data already exists and pls login');
+
+    if (isDuplicate) {
+      alert('Data already exists. Please login');
       navigate('/');
       return;
     }
-    // Merge the new data with the existing data
+
     const newData = [...existingData, values];
-  
-    // Store the updated data in local storage
     localStorage.setItem('formData', JSON.stringify(newData));
-  
-    // Redirect or perform any other actions after submitting the form
     navigate('/');
   };
-  
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
-    setDuplicateError(false); // Reset the duplicate error when the input values change
+    setDuplicateError(false);
   };
 
   return (
     <div className="app">
       <form onSubmit={handleSubmit}>
         <h1>Registration</h1>
-
-        {/* Render the duplicate error message */}
-        {/* {duplicateError && <p>User already exists. Please login.</p>} */}
 
         <FormInput
           name="username"
@@ -87,29 +64,7 @@ const PostLogin = () => {
           value={values.email}
           onChange={onChange}
         />
-        {/* <FormInput
-         name="mobileNumber"
-         type="text"
-         placeholder="Mobile Number"
-         errorMessage="Mobile number should be 10 digits"
-         label="Mobile Number"
-         pattern="[0-9]{10}"
-         required={true}
-         value={values.mobileNumber}
-         onChange={onChange}
-/> */}
 
-        
-        {/* <FormInput
-          name="DateofBirth"
-          type="date"
-          placeholder="Date of Birth"
-          label="Date of Birth"
-          required={true}
-          value={values.DateofBirth}
-          onChange={onChange}
-        /> */}
-        
         <FormInput
           name="password"
           type="text"
@@ -121,39 +76,27 @@ const PostLogin = () => {
           value={values.password}
           onChange={onChange}
         />
+
+        {/* Replace the radio buttons with a dropdown list for gender */}
         <div className='gender'>
-          <p>Gender</p>
-          <input
-            type="radio"
+          <label className='label1'>
+            <h3 className='header'>Gender</h3>
+          </label>
+          <select
+          className='gender'
             name="gender"
-            value="male"
+            value={values.gender}
             onChange={onChange}
-          />
-          <label For="Male">Male</label>
-          <input
-            type="radio"
-            name="gender"
-            value="female"
-            onChange={onChange}
-          />
-          <label For="female">Female</label>
+            required={true}  
+          >
+            {/* <option value="">Select Gender</option> */}
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
         </div>
 
-        {/* <FormInput
-          name="confirmPassword"
-          type="text"
-          placeholder="Confirm Password"
-          errorMessage="Passwords do not match"
-          label="Confirm Password"
-          pattern={values.password}
-          required={true}
-          value={values.confirmPassword}
-          onChange={onChange}
-        /> */}
-
-
-        <button  className = "btn" type="submit" onClick={() => navigate("/login")}>Submit</button>
-      </form >
+        <button className="btn" type="submit" onClick={() => navigate("/login")}>Submit</button>
+      </form>
     </div>
   );
 };

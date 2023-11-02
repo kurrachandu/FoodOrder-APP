@@ -56,3 +56,16 @@ input:invalid[focused="true"]  ~ span{
   .add-button {
     margin-left: 10px;
   }
+
+  h3{
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .gender{
+    width: 280px;
+    border-radius: 5px;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
