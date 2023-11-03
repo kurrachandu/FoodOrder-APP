@@ -36,6 +36,7 @@ const OrdersPage = () => {
                 <h3>{orderedItem.itemTitle}</h3>
                 <p>{orderedItem.itemDescription}</p>
                 <p>Price: ${orderedItem.itemPrice}</p>
+                <p>Quantity({orderedItem.itemQuantity})</p>
                 <div className='conform'>Order Conformed</div>
               </div>
             )
