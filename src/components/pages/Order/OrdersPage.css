@@ -6,7 +6,7 @@
   }
   
   .order-item {
-    height: 45vh;
+    height: 42vh;
     margin-left: 100px;
     border-radius: 10px;
     border: 1px solid #ccc;
@@ -53,3 +53,9 @@
     background-color: #0056b3;
   }
   
+  .conform{
+    text-align: center;
+    color: green;
+    font-size: 16px;
+    font-weight: bolder;
+  }
