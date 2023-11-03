@@ -43,7 +43,7 @@ const CartPage = () => {
               <h3>{cartItem.itemTitle}</h3>
               <p>{cartItem.itemDescription}</p>
               <p>Price: ${cartItem.itemPrice}</p>
-
+              <p>Quantity({cartItem.itemQuantity})</p>
               <div className='total'>
                 <button onClick={() => handlePlaceOrder(cartItem)}>PlaceOrder</button>
                 <button onClick={() => removeFromCart(index)}>Remove</button>
